@@ -1,0 +1,25 @@
+repeat until game:IsLoaded()
+local tpservice = game:GetService("TeleportService")
+local plr = game.Players.LocalPlayer
+local request = (syn and syn.request) or (http and http.request) or http_request
+
+local SupportedGames = {
+    [6152116144] = {
+        ['Name'] = "ProjectSlayers",
+        ['Maintenance'] = false,
+    }
+}
+
+if SupportedGames[game.PlaceId] then
+    local getName = SupportedGames[game.PlaceId].Name
+    local checkMT = SupportedGames[game.PlaceId].Maintenance
+    local g
+    local p = pcall(function() g = game:HttpGet("https://raw.githubusercontent.com/GramxPerson/SKAYS-HUB/main/GamesSupported/"..getName..".skays") end)
+    if p == true and not checkMT then
+        loadstring(g)()
+        
+    elseif p == true and checkMT then
+        plr:Kick('[GP] System\nscript on maintenance/updating\nJoin discord for more info \ndiscord.gg/JHjEdTq26W\n')
+        setclipboard('https://discord.gg/JHjEdTq26W')
+    end
+end
